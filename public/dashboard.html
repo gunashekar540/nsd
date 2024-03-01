@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h2>Welcome to the Dashboard, <span id="usernameSpan"></span>!</h2>
+  <p>This is the user's dashboard.</p>
+
+  <script>
+    // Function to fetch the logged-in username from the server
+    async function fetchLoggedInUsername() {
+      try {
+        const response = await fetch('/get-username'); // Add a new server route for this purpose
+        if (response.ok) {
+          const username = await response.text();
+          document.getElementById('usernameSpan').textContent = username;
+        } else {
+          console.error('Failed to fetch username:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching username:', error);
+      }
+    }
+
+    // Call the function when the dashboard loads
+    fetchLoggedInUsername();
+  </script>
+</body>
+
+</html>
